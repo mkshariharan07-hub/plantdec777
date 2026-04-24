@@ -76,7 +76,7 @@ if "chat_history" not in st.session_state:
     ]
 if "last_results" not in st.session_state or st.session_state.last_results is None:
     st.session_state.last_results = {
-        "plant": "UNKNOWN",
+        "plant": "Unknown Specimen",
         "timestamp": "12:56:39",
         "carbon": 1.12,
         "ttf": "Optimal",
@@ -256,19 +256,31 @@ with st.sidebar:
     st.markdown("### 🛠 Development Core")
     
     st.markdown("""
-    <div class="dev-card">
-        <span class="dev-name">Sindhuja R</span>
-        <span class="dev-meta">Reg: 226004099</span>
-        <span class="dev-meta">sindhujarajagopalan99@gmail.com</span>
-    </div>
-    <div class="dev-card">
-        <span class="dev-name">Saraswathy</span>
-        <span class="dev-meta">Reg: 226004092</span>
-        <span class="dev-meta">saraswathyr1203@gmail.com</span>
-    </div>
-    <div class="dev-card">
-        <span class="dev-name">U. Kiruthika</span>
-        <span class="dev-meta">udhayasuriyankiruthika@gmail.com</span>
+    <div class="dev-container">
+        <div class="dev-card">
+            <div class="dev-avatar">SR</div>
+            <div class="dev-info">
+                <p class="dev-name">Sindhuja R</p>
+                <span class="dev-meta">Reg No.: 226004099</span>
+                <span class="dev-meta">sindhujarajagopalan99@gmail.com</span>
+            </div>
+        </div>
+        <div class="dev-card">
+            <div class="dev-avatar">S</div>
+            <div class="dev-info">
+                <p class="dev-name">Saraswathy R</p>
+                <span class="dev-meta">Reg No.: 226004092</span>
+                <span class="dev-meta">saraswathyr1203@gmail.com</span>
+            </div>
+        </div>
+        <div class="dev-card">
+            <div class="dev-avatar">UK</div>
+            <div class="dev-info">
+                <p class="dev-name">Kiruthika U</p>
+                <span class="dev-meta">Reg No.: 2260040</span>
+                <span class="dev-meta">udhayasuriyankiruthika@gmail.com</span>
+            </div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 

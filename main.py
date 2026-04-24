@@ -130,17 +130,46 @@ st.markdown("""
         box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
     }
 
-    /* Developer Cards */
-    .dev-card {
-        background: rgba(255, 255, 255, 0.03);
-        border-left: 3px solid #10b981;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 0 12px 12px 0;
-        font-size: 0.85rem;
+    /* Enhanced Developer Cards */
+    .dev-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 15px;
     }
-    .dev-name { font-weight: 700; color: #34d399; display: block; }
-    .dev-meta { font-size: 0.75rem; opacity: 0.6; display: block; }
+    .dev-card {
+        background: rgba(16, 185, 129, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(16, 185, 129, 0.1);
+        padding: 12px 15px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .dev-card:hover {
+        background: rgba(16, 185, 129, 0.12);
+        border-color: rgba(52, 211, 153, 0.5);
+        transform: translateX(8px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .dev-avatar {
+        width: 42px;
+        height: 42px;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: white;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+    }
+    .dev-info { flex: 1; }
+    .dev-name { font-size: 0.95rem; font-weight: 700; color: #34d399; margin: 0; }
+    .dev-meta { font-size: 0.7rem; opacity: 0.6; display: block; margin-top: 1px; font-family: monospace; }
 
     /* Scan Line Animation */
     .scan-line {
@@ -171,7 +200,7 @@ if "chat_history" not in st.session_state:
     ]
 if "last_results" not in st.session_state or st.session_state.last_results is None:
     st.session_state.last_results = {
-        "plant": "UNKNOWN",
+        "plant": "Unknown Specimen",
         "timestamp": "12:56:39",
         "carbon": 1.12,
         "ttf": "Optimal",
@@ -308,19 +337,31 @@ with st.sidebar:
     st.markdown("### 🛠 Development Core")
     
     st.markdown("""
-    <div class="dev-card">
-        <span class="dev-name">Sindhuja R</span>
-        <span class="dev-meta">Reg: 226004099</span>
-        <span class="dev-meta">sindhujarajagopalan99@gmail.com</span>
-    </div>
-    <div class="dev-card">
-        <span class="dev-name">Saraswathy</span>
-        <span class="dev-meta">Reg: 226004092</span>
-        <span class="dev-meta">saraswathyr1203@gmail.com</span>
-    </div>
-    <div class="dev-card">
-        <span class="dev-name">U. Kiruthika</span>
-        <span class="dev-meta">udhayasuriyankiruthika@gmail.com</span>
+    <div class="dev-container">
+        <div class="dev-card">
+            <div class="dev-avatar">SR</div>
+            <div class="dev-info">
+                <p class="dev-name">Sindhuja R</p>
+                <span class="dev-meta">Core Architect | Reg: 226004099</span>
+                <span class="dev-meta">sindhujarajagopalan99@gmail.com</span>
+            </div>
+        </div>
+        <div class="dev-card">
+            <div class="dev-avatar">S</div>
+            <div class="dev-info">
+                <p class="dev-name">Saraswathy</p>
+                <span class="dev-meta">AI Research Lead | Reg: 226004092</span>
+                <span class="dev-meta">saraswathyr1203@gmail.com</span>
+            </div>
+        </div>
+        <div class="dev-card">
+            <div class="dev-avatar">UK</div>
+            <div class="dev-info">
+                <p class="dev-name">U. Kiruthika</p>
+                <span class="dev-meta">Quantum Systems Engineer</span>
+                <span class="dev-meta">udhayasuriyankiruthika@gmail.com</span>
+            </div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
