@@ -397,8 +397,18 @@ with col_in:
                         if not raw_rx:
                             raw_rx = {"remedy": "Isolate specimen and monitor microbial balance."}
                         
-                        raw_disease = kw.get('disease', 'Healthy/Indeterminate')
-                        is_healthy = 'healthy' in str(raw_disease).lower() or 'indeterminate' in str(raw_disease).lower()
+                        raw_disease = kw.get('disease')
+                        is_healthy = kw.get('healthy', False)
+                        
+                        # If Kindwise specifically said it's healthy, or if we have no disease yet
+                        if not raw_disease or is_healthy:
+                            raw_disease = 'Healthy/Indeterminate'
+                            is_healthy = True
+                        else:
+                            # Verify if the name itself contains "healthy"
+                            if 'healthy' in str(raw_disease).lower() or 'indeterminate' in str(raw_disease).lower():
+                                is_healthy = True
+
                         display_condition = "Healthy" if is_healthy else "Diseased"
                         
                         d_lower = str(raw_disease).lower()
