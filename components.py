@@ -116,12 +116,18 @@ def clinical_report_downloader(results):
     pdf.set_font("helvetica", "", 12)
     pdf.set_text_color(0, 0, 0)
     
+    def clean_text(text):
+        if not text: return ""
+        # FPDF default fonts only support Latin-1 (CP-1252/ISO-8859-1)
+        # We strip any character with code > 255 (like emojis) to prevent FPDFException
+        return "".join(c for c in str(text) if ord(c) < 256)
+
     pdf.ln(10)
-    pdf.cell(0, 10, f"Specimen: {results.get('plant')}", ln=True)
-    pdf.cell(0, 10, f"Condition: {results.get('disease')}", ln=True)
-    pdf.cell(0, 10, f"Confidence: {results.get('score')}%", ln=True)
+    pdf.cell(0, 10, clean_text(f"Specimen: {results.get('plant')}"), ln=True)
+    pdf.cell(0, 10, clean_text(f"Condition: {results.get('disease')}"), ln=True)
+    pdf.cell(0, 10, clean_text(f"Confidence: {results.get('score')}%"), ln=True)
     pdf.ln(5)
-    pdf.multi_cell(0, 10, f"Pathology: {results.get('pathology')}")
+    pdf.multi_cell(0, 10, clean_text(f"Pathology: {results.get('pathology')}"))
     pdf.ln(5)
     
     if results.get('rx'):
@@ -129,7 +135,8 @@ def clinical_report_downloader(results):
         pdf.cell(0, 10, "Remediation Directives:", ln=True)
         pdf.set_font("helvetica", "", 12)
         for k, v in results.get('rx', {}).items():
-            pdf.multi_cell(0, 10, f"- {k.replace('_',' ').title()}: {v}")
+            line = clean_text(f"- {k.replace('_',' ').title()}: {v}")
+            pdf.multi_cell(0, 10, line)
             
     pdf_bytes = pdf.output()
     
