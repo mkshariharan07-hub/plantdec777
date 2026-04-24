@@ -491,13 +491,15 @@ CO2 Credit: {r.get('carbon', 0)}kg/yr
 
 <div style="display:flex; justify-content:space-between; align-items:center; background: rgba(255,255,255,0.03); padding: 12px 18px; border-radius: 14px;">
 <div>
-<p class="metric-title" style="font-size: 0.7rem;">Condition</p>
+<p class="metric-title" style="font-size: 0.7rem;">Condition Matrix</p>
 <p style="font-size:1.4rem; font-weight:700; color: #ffffff;">{r.get('disease', 'Healthy').title()}</p>
 </div>
 <span class="badge badge-{'critical' if r.get('q', {}).get('score', 3) > 3 else 'warning' if r.get('q', {}).get('score', 3) > 2 else 'optimal'}" style="box-shadow: 0 0 20px rgba(16,185,129,0.2);">
 {r.get('q', {}).get('label', 'Baseline')} Risk
 </span>
 </div>
+
+{f'<div class="status-banner status-healthy">🌿 Specimen Optimized</div>' if 'healthy' in r.get('disease', '').lower() or 'indeterminate' in r.get('disease', '').lower() else f'<div class="status-banner status-diseased">🚨 Pathogen Detected</div>'}
 </div>
 """, unsafe_allow_html=True)
         
@@ -520,6 +522,35 @@ CO2 Credit: {r.get('carbon', 0)}kg/yr
                 st.markdown("<div style='display:inline-block; padding: 5px 12px; background: rgba(6,182,212,0.15); border: 1px solid #06b6d4; border-radius: 20px; font-size: 0.75rem; color: #67e8f9; margin-bottom: 10px;'>Powered by Crop.Health API ⚡</div>", unsafe_allow_html=True)
                 st.info(f"**Bio-Analysis:** {r.get('pathology', 'N/A')}")
                 
+                # Status Banners Styles
+                """
+                .status-banner {
+                    padding: 18px;
+                    border-radius: 20px;
+                    text-align: center;
+                    font-weight: 800;
+                    font-size: 1.1rem;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    margin: 15px 0;
+                    border: 1px solid rgba(255,255,255,0.1);
+                    backdrop-filter: blur(10px);
+                    transition: all 0.3s ease;
+                }
+                .status-healthy {
+                    background: rgba(16, 185, 129, 0.12);
+                    color: #34d399;
+                    border-color: rgba(52, 211, 153, 0.4);
+                    box-shadow: 0 0 25px rgba(16, 185, 129, 0.15), inset 0 0 15px rgba(16, 185, 129, 0.05);
+                }
+                .status-diseased {
+                    background: rgba(239, 68, 68, 0.12);
+                    color: #f87171;
+                    border-color: rgba(248, 113, 113, 0.4);
+                    box-shadow: 0 0 25px rgba(239, 68, 68, 0.15), inset 0 0 15px rgba(239, 68, 68, 0.05);
+                }
+                """
+                
                 # Voice Assistant Integration
                 voice_assistant_component()
                 
@@ -540,14 +571,6 @@ CO2 Credit: {r.get('carbon', 0)}kg/yr
                         watering = "Average (Estimated)"
                     st.write(f"**Watering Cycle:** {watering}")
                     
-                # 11. Biological ROI
-                st.markdown(f"""
-                <div style='background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; border-left:4px solid #facc15;'>
-                    <b style='color:#facc15;'>Economic Impact Analysis (ROI):</b><br/>
-                    Estimated Crop Loss: -${r.get('roi', 500)} USD <br/>
-                    Remediation Gain: +${int(r.get('roi', 500) * 0.85)} USD
-                </div>
-                """, unsafe_allow_html=True)
                 
                 # --- NEW RADAR CHART for Risk Matrix ---
                 risk_data = r.get('risk_matrix', {})
