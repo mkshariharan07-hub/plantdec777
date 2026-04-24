@@ -118,16 +118,27 @@ def clinical_report_downloader(results):
     
     def clean_text(text):
         if not text: return ""
-        # FPDF default fonts only support Latin-1 (CP-1252/ISO-8859-1)
-        # We strip any character with code > 255 (like emojis) to prevent FPDFException
-        return "".join(c for c in str(text) if ord(c) < 256)
+        # FPDF default fonts are extremely sensitive. 
+        # We now strip EVERYTHING except basic printable ASCII (32-126) plus newlines.
+        return "".join(c for c in str(text) if (32 <= ord(c) <= 126) or c == "\n")
+
+    def safe_multi_cell(pdf_obj, w, h, txt):
+        try:
+            pdf_obj.multi_cell(w, h, clean_text(txt))
+        except:
+            # If it still fails, try a very minimal version
+            try:
+                safe_txt = "".join(c for c in txt if c.isalnum() or c in " .:-")
+                pdf_obj.multi_cell(w, h, safe_txt)
+            except:
+                pass # Total fallback: skip the cell
 
     pdf.ln(10)
     pdf.cell(0, 10, clean_text(f"Specimen: {results.get('plant')}"), ln=True)
     pdf.cell(0, 10, clean_text(f"Condition: {results.get('disease')}"), ln=True)
     pdf.cell(0, 10, clean_text(f"Confidence: {results.get('score')}%"), ln=True)
     pdf.ln(5)
-    pdf.multi_cell(0, 10, clean_text(f"Pathology: {results.get('pathology')}"))
+    safe_multi_cell(pdf, 0, 10, f"Pathology: {results.get('pathology')}")
     pdf.ln(5)
     
     if results.get('rx'):
@@ -135,8 +146,7 @@ def clinical_report_downloader(results):
         pdf.cell(0, 10, "Remediation Directives:", ln=True)
         pdf.set_font("helvetica", "", 12)
         for k, v in results.get('rx', {}).items():
-            line = clean_text(f"- {k.replace('_',' ').title()}: {v}")
-            pdf.multi_cell(0, 10, line)
+            safe_multi_cell(pdf, 0, 10, f"- {k.replace('_',' ').title()}: {v}")
             
     pdf_bytes = None
     try:
