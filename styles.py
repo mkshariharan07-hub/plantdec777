@@ -76,46 +76,63 @@ ZENITH_CSS = """
         box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
     }
 
-    /* Enhanced Developer Cards */
+    /* Premium Developer Cards */
     .dev-container {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        margin-top: 15px;
+        gap: 15px;
+        margin-top: 20px;
     }
     .dev-card {
-        background: rgba(16, 185, 129, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(16, 185, 129, 0.1);
-        padding: 12px 15px;
-        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 16px;
+        border-radius: 22px;
         display: flex;
         align-items: center;
-        gap: 15px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        gap: 16px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+    }
+    .dev-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 4px; height: 100%;
+        background: var(--dev-color, #10b981);
     }
     .dev-card:hover {
-        background: rgba(16, 185, 129, 0.12);
-        border-color: rgba(52, 211, 153, 0.5);
-        transform: translateX(8px);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        background: rgba(255, 255, 255, 0.07);
+        border-color: var(--dev-color, #10b981);
+        transform: scale(1.02) translateX(5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     .dev-avatar {
-        width: 42px;
-        height: 42px;
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        border-radius: 14px;
+        width: 48px;
+        height: 48px;
+        background: var(--dev-grad);
+        border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: 700;
+        font-weight: 800;
         color: white;
-        font-size: 1.1rem;
-        box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        font-size: 1.2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
     .dev-info { flex: 1; }
-    .dev-name { font-size: 0.95rem; font-weight: 700; color: #34d399; margin: 0; }
-    .dev-meta { font-size: 0.7rem; opacity: 0.6; display: block; margin-top: 1px; font-family: monospace; }
+    .dev-name { font-size: 1rem; font-weight: 700; color: #ffffff; margin: 0; }
+    .dev-role { 
+        font-size: 0.65rem; 
+        font-weight: 800; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+        color: var(--dev-color); 
+        margin-bottom: 4px;
+        display: block;
+    }
+    .dev-meta { font-size: 0.7rem; opacity: 0.5; display: block; margin-top: 2px; }
 
     /* Scan Line Animation */
     .scan-line {

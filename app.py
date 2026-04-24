@@ -257,27 +257,30 @@ with st.sidebar:
     
     st.markdown("""
     <div class="dev-container">
-        <div class="dev-card">
+        <!-- Sindhuja R -->
+        <div class="dev-card" style="--dev-color: #34d399; --dev-grad: linear-gradient(135deg, #10b981 0%, #059669 100%);">
             <div class="dev-avatar">SR</div>
             <div class="dev-info">
                 <p class="dev-name">Sindhuja R</p>
-                <span class="dev-meta">Reg No.: 226004099</span>
+                <span class="dev-meta">Reg No: 226004099</span>
                 <span class="dev-meta">sindhujarajagopalan99@gmail.com</span>
             </div>
         </div>
-        <div class="dev-card">
+        <!-- Saraswathy R -->
+        <div class="dev-card" style="--dev-color: #60a5fa; --dev-grad: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
             <div class="dev-avatar">S</div>
             <div class="dev-info">
                 <p class="dev-name">Saraswathy R</p>
-                <span class="dev-meta">Reg No.: 226004092</span>
+                <span class="dev-meta">Reg No: 226004092</span>
                 <span class="dev-meta">saraswathyr1203@gmail.com</span>
             </div>
         </div>
-        <div class="dev-card">
+        <!-- Kiruthika U -->
+        <div class="dev-card" style="--dev-color: #fbbf24; --dev-grad: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
             <div class="dev-avatar">UK</div>
             <div class="dev-info">
                 <p class="dev-name">Kiruthika U</p>
-                <span class="dev-meta">Reg No.: 2260040</span>
+                <span class="dev-meta">Reg No: 2260040</span>
                 <span class="dev-meta">udhayasuriyankiruthika@gmail.com</span>
             </div>
         </div>
