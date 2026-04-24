@@ -374,7 +374,7 @@ with col_in:
                         if "error" in kw or not kw.get('disease'):
                             if not (isinstance(kw, dict) and kw.get('healthy')):
                                 status.write("Kindwise inconclusive. Extracting features from local pathogen matrix...")
-                                if local_pred:
+                                if local_pred and local_pred.get('confidence', 0) > 45:
                                     kw = {
                                         "disease": local_pred.get('disease', 'Healthy/Indeterminate'),
                                         "probability": local_pred.get('confidence', 0),
