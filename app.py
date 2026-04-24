@@ -522,35 +522,6 @@ CO2 Credit: {r.get('carbon', 0)}kg/yr
                 st.markdown("<div style='display:inline-block; padding: 5px 12px; background: rgba(6,182,212,0.15); border: 1px solid #06b6d4; border-radius: 20px; font-size: 0.75rem; color: #67e8f9; margin-bottom: 10px;'>Powered by Crop.Health API ⚡</div>", unsafe_allow_html=True)
                 st.info(f"**Bio-Analysis:** {r.get('pathology', 'N/A')}")
                 
-                # Status Banners Styles
-                """
-                .status-banner {
-                    padding: 18px;
-                    border-radius: 20px;
-                    text-align: center;
-                    font-weight: 800;
-                    font-size: 1.1rem;
-                    letter-spacing: 2px;
-                    text-transform: uppercase;
-                    margin: 15px 0;
-                    border: 1px solid rgba(255,255,255,0.1);
-                    backdrop-filter: blur(10px);
-                    transition: all 0.3s ease;
-                }
-                .status-healthy {
-                    background: rgba(16, 185, 129, 0.12);
-                    color: #34d399;
-                    border-color: rgba(52, 211, 153, 0.4);
-                    box-shadow: 0 0 25px rgba(16, 185, 129, 0.15), inset 0 0 15px rgba(16, 185, 129, 0.05);
-                }
-                .status-diseased {
-                    background: rgba(239, 68, 68, 0.12);
-                    color: #f87171;
-                    border-color: rgba(248, 113, 113, 0.4);
-                    box-shadow: 0 0 25px rgba(239, 68, 68, 0.15), inset 0 0 15px rgba(239, 68, 68, 0.05);
-                }
-                """
-                
                 # Voice Assistant Integration
                 voice_assistant_component()
                 
