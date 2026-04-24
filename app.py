@@ -92,7 +92,15 @@ if "last_results" not in st.session_state or st.session_state.last_results is No
         "waypoints": []
     }
 if "specimen_history" not in st.session_state:
-    st.session_state.specimen_history = load_scan_history()
+    raw_history = load_scan_history()
+    st.session_state.specimen_history = []
+    for entry in raw_history:
+        if isinstance(entry, dict):
+            st.session_state.specimen_history.append({
+                "name": entry.get("name") or entry.get("plant") or "Unknown Specimen",
+                "status": entry.get("status") or entry.get("disease") or "N/A",
+                "time": entry.get("time") or entry.get("timestamp") or "N/A"
+            })
 if "assistant_mode" not in st.session_state:
     st.session_state.assistant_mode = "Quantum Oracle"
 if "last_scan_id" not in st.session_state:
@@ -510,9 +518,13 @@ CO2 Credit: {r.get('carbon', 0)}kg/yr
             history = st.session_state.specimen_history[::-1] # Show newest first
             if history:
                 for entry in history[:10]: # Show last 10
-                    with st.expander(f"📅 {entry['time']} | {entry['name']}"):
-                        st.write(f"**Status:** {entry['status']}")
-                        st.write(f"**Species:** {entry['name']}")
+                    e_name = entry.get('name') or entry.get('plant') or 'Unknown Specimen'
+                    e_time = entry.get('time') or entry.get('timestamp') or 'N/A'
+                    e_status = entry.get('status') or entry.get('disease') or 'N/A'
+                    
+                    with st.expander(f"📅 {e_time} | {e_name}"):
+                        st.write(f"**Status:** {e_status}")
+                        st.write(f"**Species:** {e_name}")
             else:
                 st.info("No historical biological data available.")
         
