@@ -138,18 +138,25 @@ def clinical_report_downloader(results):
             line = clean_text(f"- {k.replace('_',' ').title()}: {v}")
             pdf.multi_cell(0, 10, line)
             
-    pdf_bytes = pdf.output()
+    pdf_bytes = None
+    try:
+        pdf_bytes = bytes(pdf.output())
+    except Exception as e:
+        st.error(f"Failed to generate PDF dossier: {e}")
     
     with colD1:
         st.info("Export highly detailed PDF Clinical Dossier for agronomist review.")
-        st.download_button(
-            label="📥 Download Clinical PDF",
-            data=pdf_bytes,
-            file_name=f"Emerald_{results.get('plant', 'scan')}.pdf",
-            mime="application/pdf",
-            use_container_width=True,
-            key="pdf_download_btn"
-        )
+        if pdf_bytes:
+            st.download_button(
+                label="📥 Download Clinical PDF",
+                data=pdf_bytes,
+                file_name=f"Emerald_{results.get('plant', 'scan')}.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+                key="pdf_download_btn"
+            )
+        else:
+            st.warning("Dossier generation failed. Matrix unavailable.")
         
     with colD2:
         st.success("Export raw JSON/CSV structured biological matrices.")
