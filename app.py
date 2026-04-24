@@ -65,7 +65,6 @@ from components import voice_assistant_component, clinical_report_downloader, vo
 
 st.markdown(ZENITH_CSS, unsafe_allow_html=True)
 st.markdown(BLOSSOM_LEAVES, unsafe_allow_html=True)
-""", unsafe_allow_html=True)
 
 # ===============================
 # SESSION STATE
