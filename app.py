@@ -101,6 +101,7 @@ if "last_scan_id" not in st.session_state:
 # ===============================
 # QUANTUM SEVERITY PROBABILISTIC
 # ===============================
+def analyze_severity_quantum(img, backend_pref):
     try:
         small = cv2.resize(img, (64, 64))
         hsv = cv2.cvtColor(small, cv2.COLOR_BGR2HSV)
