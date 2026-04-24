@@ -397,7 +397,11 @@ with col_in:
                         if not raw_rx:
                             raw_rx = {"remedy": "Isolate specimen and monitor microbial balance."}
                         
-                        d_lower = str(kw.get('disease', '')).lower()
+                        raw_disease = kw.get('disease', 'Healthy/Indeterminate')
+                        is_healthy = 'healthy' in str(raw_disease).lower() or 'indeterminate' in str(raw_disease).lower()
+                        display_condition = "Healthy" if is_healthy else "Diseased"
+                        
+                        d_lower = str(raw_disease).lower()
                         p_cat = "Organic Bio-Stimulant"
                         p_search = "liquid+seaweed+fertilizer"
                         if "fungal" in d_lower: p_cat, p_search = "Fungicide", "organic+fungicide"
@@ -407,7 +411,8 @@ with col_in:
                         res = {
                             "plant": plant_key,
                             "common_name": c_name,
-                            "disease": kw.get('disease', 'Healthy/Indeterminate'),
+                            "disease": display_condition,
+                            "raw_disease": raw_disease,
                             "score": pn.get('score', 0),
                             "q": q,
                             "care": care if care else {"sunlight": ["Full Sun (Synthesized)"], "watering": "Average (Estimated)"},
