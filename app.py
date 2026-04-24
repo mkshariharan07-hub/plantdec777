@@ -259,7 +259,7 @@ with st.sidebar:
     <div class="dev-container">
         <!-- Sindhuja R -->
         <div class="dev-card" style="--dev-color: #34d399; --dev-grad: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-            <div class="dev-avatar">SR</div>
+            <div class="dev-avatar">S</div>
             <div class="dev-info">
                 <p class="dev-name">Sindhuja R</p>
                 <span class="dev-meta">Reg No: 226004099</span>
@@ -277,7 +277,7 @@ with st.sidebar:
         </div>
         <!-- Kiruthika U -->
         <div class="dev-card" style="--dev-color: #fbbf24; --dev-grad: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
-            <div class="dev-avatar">UK</div>
+            <div class="dev-avatar">K</div>
             <div class="dev-info">
                 <p class="dev-name">Kiruthika U</p>
                 <span class="dev-meta">Reg No: 2260040</span>
