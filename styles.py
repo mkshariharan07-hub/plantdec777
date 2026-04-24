@@ -212,6 +212,32 @@ ZENITH_CSS = """
         0% { transform: scale(.33); }
         80%, 100% { opacity: 0; }
     }
+    /* Status Banners */
+    .status-banner {
+        padding: 18px;
+        border-radius: 20px;
+        text-align: center;
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin: 15px 0;
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+    }
+    .status-healthy {
+        background: rgba(16, 185, 129, 0.12);
+        color: #34d399;
+        border-color: rgba(52, 211, 153, 0.4);
+        box-shadow: 0 0 25px rgba(16, 185, 129, 0.15), inset 0 0 15px rgba(16, 185, 129, 0.05);
+    }
+    .status-diseased {
+        background: rgba(239, 68, 68, 0.12);
+        color: #f87171;
+        border-color: rgba(248, 113, 113, 0.4);
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.15), inset 0 0 15px rgba(239, 68, 68, 0.05);
+    }
 </style>
 """
 
